@@ -1,0 +1,11 @@
+{
+  "name": "how_to_tab",
+  "version": "1.0.0",
+  "description": "How to tab\r =========",
+  "main": "jakefile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
