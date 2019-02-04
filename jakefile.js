@@ -1,16 +1,20 @@
 (function () {
     "use strict";
+
+    var EXPECTED_NODE_VERSION = "v10.14.1"
     console.log("\n \n BUILD OK");
 
     desc("Default build");
-    task("default" ,function () {
+    task("default" ,["version"],function () {
         console.log("Hello i am default task");
     });
 
-    desc("Pure ridiculosity");
-    task("gooble",function () {
-        console.log("goodle doole");
-
-
+    desc("check node version");
+    task("version",function () {
+        console.log("Checking node version: .");
+        var actualVersion = process.version;
+        if(actualVersion!==EXPECTED_NODE_VERSION){
+            fail("Incorrect node version : Expected"+EXPECTED_NODE_VERSION +"but was actual"+actualVersion)
+        }
     });
 }());
