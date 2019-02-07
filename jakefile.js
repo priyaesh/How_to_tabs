@@ -1,14 +1,24 @@
+/*globals:{jake:false,desc:false,task:false,complete:false,fail:false
+            }*/
 (function () {
     "use strict";
 
     var semver = require("semver");
     var jshint = require("simplebuild-jshint");
 
+    //***General -purpose tasks  */
     desc("Default build");
     task("default" ,["version","lint"],function () {
         console.log("\n \n BUILD OK");
     });
 
+    desc("Run a localhost server");
+    task("run", function(){
+        jake.exec("node node_modules/http-server/bin/http-server src",{interactive:true},complete);
+        console.log("Run http-server");
+     });
+
+    //*Supporting task*/
     desc("check node version");
     task("version",function () {
         console.log("Checking node version: .");
@@ -43,15 +53,10 @@
                 undef:true,
                 node:true,
                 browser:true
-
-            },
-            globals:{
-                desc:false,
-                task:false,
-                complete:false,
-                fail:false
-            }
-        }, complete,fail);
+                 },
+                 global:{
+             } 
+            },complete,fail);
        // jake.exec(" node node_modules/jshint/bin/jshint jakefile.js", {interactive:true},complete);
     },{ async:true} ); 
 }());
