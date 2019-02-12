@@ -42,7 +42,7 @@
         process.stdout.write("Linting JavaScript code:");
 
         jshint.checkFiles({
-            files:"Jakefile.js",
+            files:["Jakefile.js","src/**/*.js"],
             options:{
                 bitwise:true,
                 eqeqeq:true,
