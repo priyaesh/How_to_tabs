@@ -1,5 +1,10 @@
-/*globals:{jake:false,desc:false,task:false,complete:false,fail:false
-            }*/
+/*global:{
+    desc:false,
+    task:false,
+    complete:false,
+    fail:false
+} */
+
 (function () {
     "use strict";
 
@@ -14,11 +19,11 @@
 
     desc("Run a localhost server");
     task("run", function(){
-        jake.exec("node node_modules/http-server/bin/http-server src",{interactive:true},complete);
+     jake.exec("node node_modules/http-server/bin/http-server src",{interactive:true},complete);
         console.log("Run http-server");
      });
 
-    //*Supporting task*/
+    // //*Supporting task*/
     desc("check node version");
     task("version",function () {
         console.log("Checking node version: .");
@@ -54,9 +59,16 @@
                 node:true,
                 browser:true
                  },
-                 global:{
-             } 
-            },complete,fail);
+                 globals:{
+                    jake:false,
+                    desc:false,
+                    task:false,
+                    complete:false,
+                    fail:false 
+
+                 },
+                },complete,fail);
        // jake.exec(" node node_modules/jshint/bin/jshint jakefile.js", {interactive:true},complete);
-    },{ async:true} ); 
+    }
+     ); 
 }());
