@@ -57,7 +57,11 @@
     task("test",function(){
         console.log("Testing");
         karma.run({
-            configFile:KARMA_CONFIG
+            configFile:KARMA_CONFIG,
+            expectedBrowser:[
+                "Chrome 72.0.3626 (Windows 10.0.0) is idle"
+                //"Edge 17.17134.0 (Windows 10.0.0) is idle"
+            ]
         },complete,fail);
     },{async:true});
 
