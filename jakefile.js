@@ -13,11 +13,18 @@
     var jshint = require("simplebuild-jshint");
    // var karma = require("simplebuild-karma");
 
+
+    desc("start the karma server (run this first)");
+    task("karma",function(){
+        console.log("Start the karma server");
+    });
     //***General -purpose tasks  */
     desc("Default build");
     task("default" ,["version","lint"],function () {
         console.log("\n \n BUILD OK");
     });
+
+   
 
     desc("Run a localhost server");
     task("run", function(){
