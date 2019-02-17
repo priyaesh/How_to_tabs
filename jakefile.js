@@ -3,6 +3,7 @@
     task:false,
     complete:false,
     fail:false
+
 } */
 
 (function () {
@@ -10,6 +11,7 @@
 
     var semver = require("semver");
     var jshint = require("simplebuild-jshint");
+   // var karma = require("simplebuild-karma");
 
     //***General -purpose tasks  */
     desc("Default build");
@@ -59,12 +61,19 @@
                 node:true,
                 browser:true
                  },
+                 //Mocha
                  globals:{
                     jake:false,
                     desc:false,
                     task:false,
                     complete:false,
-                    fail:false 
+                    fail:false,
+                    describe:false,
+                    it:false,
+                    before:false,
+                    after:false,
+                    beforeEach:false,
+                    afterEach:false
 
                  },
                 },complete,fail);
