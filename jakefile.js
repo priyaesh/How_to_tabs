@@ -45,39 +45,46 @@
 
         jshint.checkFiles({
             files:["Jakefile.js","src/**/*.js"],
-            options:{
-                bitwise:true,
-                eqeqeq:true,
-                forin:true,
-                freeze:true,
-                futurehostile:true,
-                latedef:"nofunc",
-                noarg:true,
-                nocomma:true,
-                nonbsp:true,
-                nonew:true,
-                strict:true,
-                undef:true,
-                node:true,
-                browser:true
-                 },
-                 //Mocha
-                 globals:{
-                    jake:false,
-                    desc:false,
-                    task:false,
-                    complete:false,
-                    fail:false,
-                    describe:false,
-                    it:false,
-                    before:false,
-                    after:false,
-                    beforeEach:false,
-                    afterEach:false
+            options: lintOption(),
+            globals:lintGlobal(),
+        },
+        complete,fail);
+       },{async:true});
 
-                 },
-                },complete,fail);
-       // jake.exec(" node node_modules/jshint/bin/jshint jakefile.js", {interactive:true},complete);
-    }
-     ); 
+     function lintOption(){
+         return {
+            bitwise:true,
+            eqeqeq:true,
+            forin:true,
+            freeze:true,
+            futurehostile:true,
+            latedef:"nofunc",
+            noarg:true,
+            nocomma:true,
+            nonbsp:true,
+            nonew:true,
+            strict:true,
+            undef:true,
+            node:true,
+            browser:true
+         };
+        }
+    
+     function lintGlobal(){
+         return {
+            jake:false,
+            desc:false,
+            task:false,
+            complete:false,
+            fail:false,
+            describe:false,
+            it:false,
+            before:false,
+            after:false,
+            beforeEach:false,
+            afterEach:false
+
+            };
+        }
+    
 }());
