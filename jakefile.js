@@ -61,7 +61,8 @@
             expectedBrowser:[
                 "Chrome 72.0.3626 (Windows 10.0.0) is idle"
                 //"Edge 17.17134.0 (Windows 10.0.0) is idle"
-            ]
+            ],
+            strict: !process.env.loose
         },complete,fail);
     },{async:true});
 
