@@ -15,7 +15,7 @@
     var shell = require("shelljs");
 
     var KARMA_CONFIG = "karma.conf.js";
-    var DIST_DIR = "generated/dist"
+    var DIST_DIR = "generated/dist";
 
 
     desc("start the karma server (run this first)");
@@ -78,7 +78,7 @@
          {interactive:true},
           complete 
           );
-    });  
+    },{async:true});  
   
         
 
@@ -86,8 +86,8 @@
 
     desc("Erase all generated files");
     task("clean",function(){
-        console.log("Erasing generated files:.")
-        shell.rm("-rf","generated")
+        console.log("Erasing generated files:.");
+        shell.rm("-rf","generated");
     });
 
     desc("Lint JavaScript code");
@@ -95,7 +95,7 @@
         process.stdout.write("Linting JavaScript code:");
 
         jshint.checkFiles({
-            files:["Jakefile.js","src/**/*.js"],
+            files:["Jakefile.js","src/javascript/**/*.js"],
             options: lintOption(),
             globals:lintGlobal(),
         },
@@ -133,7 +133,8 @@
             before:false,
             after:false,
             beforeEach:false,
-            afterEach:false
+            afterEach:false,
+            directory:false
 
             };
         }

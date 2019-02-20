@@ -1,5 +1,5 @@
 // Karma configuration
-// Generated on Fri Feb 15 2019 12:52:00 GMT-0500 (Eastern Standard Time)
+// Generated on Wed Feb 20 2019 13:57:14 GMT-0500 (Eastern Standard Time)
 
 module.exports = function(config) {
   config.set({
@@ -15,7 +15,8 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'src/**/*.js'
+      'src/javascript/**/*.js',
+      'src/vendor/**/*.js'
     ],
 
 
@@ -27,7 +28,8 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'src/**/*.js':['commonjs']
+      'src/javascript/**/*.js':['commonjs'],
+      'src/vendor/**/*.js':['commonjs']
     },
 
 
@@ -56,7 +58,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
+    browsers: false,
 
 
     // Continuous Integration mode
