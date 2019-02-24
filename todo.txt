@@ -1,0 +1,7 @@
+Mark a tab as active
+
+Hide all inactive content divs
+
+Hide one inactive content divs
+
+Hide one content divs
