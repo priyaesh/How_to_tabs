@@ -7,26 +7,33 @@
 
     describe("Tabs",function(){
         it("Hide an element", function(){
-            //create element
-            var element = document.createElement("div");
-            //act
+            
+            var element = addElement("div");           
+
             tabs.initialize(element);
 
-            //assert 
-             var styles = getComputedStyle(element);
-             var display = styles.getPropertyValue(display);
+            assert.equal(getDisplayValue(element),"none");
 
-             assert.equal(display,"none");
-            
-            // div.innerHTML = "This is my div ";
-            // document.body.appendChild(div);
-            // var p = document.createElement("p");
-            // p.innerHTML = "This is embedded in paragraph";
-            // div.appendChild(p);
-
-            // div.parentNode.removeChild(div);
+            removeElement(element);
+           
         });
-       
+       function addElement(tagName){
+           var element = document.createElement(tagName);
+           document.body.appendChild(element);
+           return element;
+
+       }
+
+       function getDisplayValue(element){
+        var styles = getComputedStyle(element);
+        return  styles.getPropertyValue("display");
+     
+       }
+
+       function removeElement(element){
+        element.parentNode.removeChild(element);
+       }
+
     });
 
    
