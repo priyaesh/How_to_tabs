@@ -2,7 +2,7 @@
 (function(){
     "use strict";
 
-    exports.initialize = function initialize(element){
-        element.style.display = "none";
+    exports.initialize = function initialize(element, className){
+        element.setAttribute("class",className);
     };
 }());
