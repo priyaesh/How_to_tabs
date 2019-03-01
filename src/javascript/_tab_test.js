@@ -6,7 +6,7 @@
     var tabs = require("./tabs.js");
 
     describe("Tabs",function(){
-        it("Sets a class on an  element", function(){
+        it("Sets a class on an element when that element has no existing classes ", function(){
             
             var element = addElement("div");           
 
@@ -18,6 +18,17 @@
 
             removeElement(element);
            
+        });
+
+        it("sets a class on an element without erasing existing class", function(){
+            var element = addElement("div");
+            element.setAttribute("class","existingClass");
+
+            tabs.initialize(element,"newClass");
+
+            assert.equal(getClass(element), "existingClass newClass");
+
+            removeElement(element);
         });
         
         
