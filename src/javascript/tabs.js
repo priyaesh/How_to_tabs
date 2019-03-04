@@ -5,14 +5,12 @@
     var classList = require("../vendor/classList.js");
     classList.shim();
 
-    exports.initialize = function initialize(element, className){
-        element.classList.add(className);
+    exports.initialize = function initialize(elementList, className){
 
-       // var classes = element.getAttribute("class");
+        elementList.forEach(function(element){
+            element.classList.add(className);
 
-        //if(classes ===null ) classes = className;
-        //else classes += " " + className;
-
-        //element.setAttribute("class",classes);
+        });
+        
     };
 }());
