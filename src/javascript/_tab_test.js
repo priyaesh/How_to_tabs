@@ -18,38 +18,42 @@
             removeElement(container);
         });
     
-        it("hides an element by setting the class", function(){
-            
-            var element = addElement("div");           
-
-            tabs.initialize([element],"someClass");
-
-            assert.equal(getClasses(element),"someClass");
-
-          
-        });
-        it("hide multiple elements", function(){
+        
+        it("hide all content elements except the default upon initialization", function(){
             var element1 = addElement("div");
-            var element2 = addElement("div");
+            var defaultElement = addElement("div");
             var element3 = addElement("div");
 
-            tabs.initialize([element1,element2,element3],"hideClass");
+            tabs.initialize({
+                content:[element1,defaultElement,element3],
+                default:defaultElement,
+                contentHideClass:"hideClass"
 
-            assert.equal(getClasses(element1), "hideClass","element1");
-            assert.equal(getClasses(element2), "hideClass","element2");
-             assert.equal(getClasses(element3), "hideClass","element3");
+            });
+                
+
+            assert.equal(getClasses(element1), "hideClass","element1 should be hidden");
+            assert.equal(getClasses(defaultElement), "","defaultElement should not be hidden");
+             assert.equal(getClasses(element3), "hideClass","element3 should be hidden");
             
 
         });
         
 
-        it("preserve existing class when hideing  an element ", function(){
-            var element = addElement("div");
-            element.setAttribute("class","existingClass");
+        it("preserve existing class when hiding a content element ", function(){
+            var defaultElement = addElement("div");
+            var hiddenElement = addElement("div");
+            hiddenElement.setAttribute("class","existingClass");
 
-            tabs.initialize([element],"newClass");
+            tabs.initialize({
+                content:[defaultElement, hiddenElement],
+                default:defaultElement,
+                contentHideClass:"newClass"
 
-            assert.equal(getClasses(element), "existingClass newClass");
+            });
+                
+
+            assert.equal(getClasses(hiddenElement), "existingClass newClass");
 
             
         });
