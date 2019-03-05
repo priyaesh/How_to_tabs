@@ -6,17 +6,25 @@
     classList.shim();
 
     exports.initialize = function initialize(options){
-        var elementList = options.content;
+        var tabs = options.tabs;
+        var content = options.content;
+        
         var defaultElement = options.default;
-        var className = options.contentHideClass;
-
-        if(elementList === undefined) throw new Error("Expected options.content");
+        var contentHideClass = options.contentHideClass;
+        var activeTabClass = options.activeTabClass;
+    
+        if(tabs === undefined) throw new Error("Expected options.tab");
+        if(activeTabClass === undefined) throw new Error("Expected options.activeTabClass");
+        if(content === undefined) throw new Error("Expected options.content");
         if(defaultElement === undefined) throw new Error("Expected options.defaultElement");
-        if(className === undefined) throw new Error ("Expected option.contentHideClass");
-        elementList.forEach(function(element){
-            element.classList.add(className);
+        if(contentHideClass === undefined) throw new Error ("Expected option.contentHideClass");
+
+        content.forEach(function(element){
+            element.classList.add(contentHideClass);
 
         });
-        defaultElement.classList.remove(className);
+        defaultElement.classList.remove(contentHideClass);
+
+       if(tabs !== undefined) tabs[0].classList.add(activeTabClass);
     };
 }());
