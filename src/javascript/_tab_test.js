@@ -8,6 +8,8 @@
     
     describe("Tabs",function(){
         var container;
+
+        var IRRELEVANT = "irrelvent";
         beforeEach(function(){
             container = document.createElement("div");
             document.body.appendChild(container);
@@ -20,18 +22,14 @@
     
         
         it("hide all content elements except the default upon initialization", function(){
-            var tab1 = createTab();
-            var defaultTab = createTab();
-            var tab3 = createTab();
-
-            var element1 = createTabContent();
+              var element1 = createTabContent();
             var defaultElement = createTabContent();
             var element3 = createTabContent();
             tabs.initialize({
-                tabs: [tab1, defaultTab, tab3],
+                tabs: [createTab(), createTab(), createTab()],
                 content:[element1,defaultElement,element3],
                 default:defaultElement,
-                activeTabClass:"activeTab",
+                activeTabClass:IRRELEVANT,
                 contentHideClass:"hideClass"
 
             });
@@ -46,15 +44,13 @@
         
 
         it("preserve existing class when hiding a content element ", function(){
-            var defaultTab = createTab();
-            var hiddenTab = createTab();
-
+           
             var defaultElement = createTabContent();
             var hiddenElement = createTabContent();
             hiddenElement.setAttribute("class","existingClass");
 
             tabs.initialize({
-                tabs: [defaultTab,hiddenTab],
+                tabs: [createTab(),createTab()],
                 content:[defaultElement, hiddenElement],
                 default:defaultElement,
                 activeTabClass: "activeTab",
