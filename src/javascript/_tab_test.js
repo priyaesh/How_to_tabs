@@ -32,7 +32,7 @@
                 content:[content1,defaultContent,content3],
                 default: defaultTab,
                 activeTabClass: IRRELEVANT,
-                contentHideClass: "hideClass"
+                hiddenContentClass: "hideClass"
 
             });
                 
@@ -45,24 +45,26 @@
         });
         
 
-        it("preserve existing class when hiding a content element ", function(){
+        it("preserve existing class when adding a new classes ", function(){
             var defaultTab = createTab();
+            defaultTab.setAttribute("class","existingTabClass");
 
             var defaultContent = createTabContent();
             var hiddenContent = createTabContent();
-            hiddenContent.setAttribute("class","existingClass");
+            hiddenContent.setAttribute("class","existingContentClass");
 
             tabs.initialize({
                 tabs: [defaultTab,createTab()],
                 content:[defaultContent, hiddenContent],
                 default:defaultTab,
                 activeTabClass: "activeTab",
-                contentHideClass:"newClass"
+                hiddenContentClass:"hiddenContent"
 
             });
+            assert.equal(getClasses(defaultTab),"existingTabClass activeTab", "tab should preserve existing classes");
                 
 
-            assert.equal(getClasses(hiddenContent), "existingClass newClass");
+            assert.equal(getClasses(hiddenContent), "existingContentClass hiddenContent","content should preserve existing classes");
 
             
         });
@@ -78,7 +80,7 @@
                 content:[createTabContent(),defaultContent,createTabContent()],
                 default:defaultTab,
                 activeTabClass:"activeTab",
-                contentHideClass:"ignored"
+                hiddenContentClass:"ignored"
             });
             assert.equal(getClasses(tab1), null,"tab1 should not be styled");
             assert.equal(getClasses(defaultContent), "","defaultTabContent should  be styled");
