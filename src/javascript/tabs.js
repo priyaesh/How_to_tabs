@@ -9,22 +9,36 @@
         var tabs = options.tabs;
         var content = options.content;
         
-        var defaultElement = options.default;
+        var defaultTab = options.default;
         var contentHideClass = options.contentHideClass;
         var activeTabClass = options.activeTabClass;
     
-        if(tabs === undefined) throw new Error("Expected options.tab");
-        if(activeTabClass === undefined) throw new Error("Expected options.activeTabClass");
-        if(content === undefined) throw new Error("Expected options.content");
-        if(defaultElement === undefined) throw new Error("Expected options.defaultElement");
-        if(contentHideClass === undefined) throw new Error ("Expected option.contentHideClass");
 
+        checkOption(tabs,"options.tabs");
+        checkOption(content,"options.content");
+        checkOption(defaultTab,"options.default");
+        checkOption(activeTabClass,"options.activeTabClass");
+        checkOption(contentHideClass,"options.contentHideClass");
+
+        var activeIndex = findIndexOfDefaultElement(tabs, defaultTab);
+         var defaultContent = content[activeIndex];
+      
         content.forEach(function(element){
             element.classList.add(contentHideClass);
 
         });
-        defaultElement.classList.remove(contentHideClass);
-
-       if(tabs !== undefined) tabs[0].classList.add(activeTabClass);
+        defaultContent.classList.remove(contentHideClass);
+        defaultTab.classList.add(activeTabClass);
     };
+
+    function findIndexOfDefaultElement(contentTab, defaultContentTab){
+        for(var i=0;i < contentTab.length; i++){
+            if(contentTab[i] === defaultContentTab)
+            return i;
+        }
+        throw new Error ("Could not be find default in list");
+    }
+    function checkOption(option, name){
+        if(option === undefined) throw new Error ("Expected "+name);
+    }
 }());
