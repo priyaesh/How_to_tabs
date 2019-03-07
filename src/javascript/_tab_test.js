@@ -10,6 +10,7 @@
         var container;
 
         var IRRELEVANT = "irrelvent";
+        var HIDDEN_CONTENT = "hideClass";
         beforeEach(function(){
             container = document.createElement("div");
             document.body.appendChild(container);
@@ -21,7 +22,7 @@
         });
     
         
-        it("hide all content elements except the defaultTab upon initialization", function(){
+        it("use a class to hide all content elements except the defaultTab upon initialization", function(){
             var defaultTab = createTab();
 
               var content1 = createTabContent();
@@ -32,17 +33,17 @@
                 content:[content1,defaultContent,content3],
                 defaultTab: defaultTab,
                 activeTabClass: IRRELEVANT,
-                hiddenContentClass: "hideClass"
+                hiddenContentClass: HIDDEN_CONTENT
 
             });
                 
 
-            assert.equal(getClasses(content1), "hideClass","content1 should be hidden");
+            assertContentHidden(content1, "element1");
+            assertContentVisible(defaultContent,"default element");
             assert.equal(getClasses(defaultContent), "","defaultTabContent should not be hidden");
-             assert.equal(getClasses(content3), "hideClass","content3 should be hidden");
-            
-
+            assertContentHidden(content3, "element3");
         });
+
         
         it("switch content when tab is clicked", function(){
             var tab1 = createTab();
@@ -118,6 +119,14 @@
         });
 
         
+        function assertContentHidden(element, elementName){
+            assert.equal(getClasses(element), HIDDEN_CONTENT, elementName +"should be hidden");
+        }
+
+        function assertContentVisible(element, elementName){
+            assert.equal(getClasses(element), "", elementName +"should not be hidden");
+      
+        }
         
        function addElement(tagName){
            var element = document.createElement(tagName);
