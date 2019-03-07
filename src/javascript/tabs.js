@@ -6,37 +6,35 @@
     classList.shim();
 
     exports.initialize = function initialize(options){
-        var tabs = options.tabs;
-        var content = options.content;
         
-        var defaultTab = options.default;
-        var hiddenContentClass = options.hiddenContentClass;
-        var activeTabClass = options.activeTabClass;
-    
+        
+       
+        
+ 
+        checkOption(options.tabs,"options.tabs");
+        checkOption(options.content,"options.content");
+        checkOption(options.defaultTab,"options.default");
+        checkOption(options.activeTabClass,"options.activeTabClass");
+        checkOption(options.hiddenContentClass,"options.hiddenContentClass");
 
-        checkOption(tabs,"options.tabs");
-        checkOption(content,"options.content");
-        checkOption(defaultTab,"options.default");
-        checkOption(activeTabClass,"options.activeTabClass");
-        checkOption(hiddenContentClass,"options.hiddenContentClass");
+        var defaultTab = options.defaultTab;
+        
+        showTab(options.defaultTab, options);
+        };
 
-        showTab(defaultTab, tabs, content, activeTabClass, hiddenContentClass);
-
-     };
-
-     function showTab(tabToShow, tabs, content, activeTabClass, hiddenContentClass){
-        var activeIndex = findIndexOfDefaultElement(tabs, tabToShow);
-        var defaultContent = content[activeIndex];
+     function showTab(tabToShow, options){
+        var activeIndex = findIndex(options.tabs, tabToShow);
+        var defaultContent = options.content[activeIndex];
   
-        content.forEach(function(element){
-        element.classList.add(hiddenContentClass);
+        options.content.forEach(function(element){
+        element.classList.add(options.hiddenContentClass);
 
          });
-        defaultContent.classList.remove(hiddenContentClass);
-        tabToShow.classList.add(activeTabClass);
+        defaultContent.classList.remove(options.hiddenContentClass);
+        tabToShow.classList.add(options.activeTabClass);
     }
 
-    function findIndexOfDefaultElement(contentTab, defaultContentTab){
+    function findIndex(contentTab, defaultContentTab){
         for(var i=0;i < contentTab.length; i++){
             if(contentTab[i] === defaultContentTab)
             return i;
