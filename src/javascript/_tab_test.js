@@ -61,7 +61,11 @@
                 activeTabClass: "activeTab",
                 hiddenContentClass: "hiddenContent"
             });
+            tab2.click();
+            assertContentVisible(content2, "content 2");
 
+            tab3.click();
+            assertContentVisible(content3, "content3");
             //click tab2
             //assert content2 is visible
             //assert content1 is no longer visible
