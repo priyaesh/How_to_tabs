@@ -6,11 +6,7 @@
     classList.shim();
 
     exports.initialize = function initialize(options){
-        
-        
-       
-        
- 
+      
         checkOption(options.tabs,"options.tabs");
         checkOption(options.content,"options.content");
         checkOption(options.defaultTab,"options.default");
@@ -24,13 +20,13 @@
 
      function showTab(tabToShow, options){
         var activeIndex = findIndex(options.tabs, tabToShow);
-        var defaultContent = options.content[activeIndex];
+        var contentToShow = options.content[activeIndex];
   
         options.content.forEach(function(element){
         element.classList.add(options.hiddenContentClass);
 
          });
-        defaultContent.classList.remove(options.hiddenContentClass);
+        contentToShow.classList.remove(options.hiddenContentClass);
         tabToShow.classList.add(options.activeTabClass);
     }
 

@@ -44,8 +44,32 @@
 
         });
         
+        it("switch content when tab is clicked", function(){
+            var tab1 = createTab();
+            var tab2 = createTab();
+            var tab3 = createTab();
 
-        it("preserve existing class when adding a new classes ", function(){
+            var content1 = createTabContent();
+            var content2 = createTabContent();
+            var content3 = createTabContent();
+
+            tabs.initialize({
+                tabs: [tab1, tab2, tab3],
+                content: [content1, content2, content3],
+                defaultTab: tab1,
+                activeTabClass: "activeTab",
+                hiddenContentClass: "hiddenContent"
+            });
+
+            //click tab2
+            //assert content2 is visible
+            //assert content1 is no longer visible
+
+            //assert tab2 is active
+            //assert tab1 is no longer active
+        });
+
+        it("preserve existing class when adding a new classes upon initialization ", function(){
             var defaultTab = createTab();
             defaultTab.setAttribute("class","existingTabClass");
 
