@@ -8,7 +8,7 @@
     
     describe("Tabs",function(){
         var container;
-
+        var ACTIVE_TAB ="activeClass";
         var IRRELEVANT = "irrelvent";
         var HIDDEN_CONTENT = "hideClass";
         beforeEach(function(){
@@ -104,16 +104,23 @@
                 tabs:[tab1,defaultTab,tab3],
                 content:[createTabContent(),defaultContent,createTabContent()],
                 defaultTab:defaultTab,
-                activeTabClass:"activeTab",
-                hiddenContentClass:"ignored"
+                activeTabClass:ACTIVE_TAB,
+                hiddenContentClass:IRRELEVANT
             });
-            assert.equal(getClasses(tab1), null,"tab1 should not be styled");
-            assert.equal(getClasses(defaultContent), "","defaultTabContent should  be styled");
-             assert.equal(getClasses(tab3), null,"tab3 should not be styled");
-            
+            assertTabInActive(tab1, "tab 1");
+             assertTabActive(defaultTab, "defaultTab") ;
+            assertTabInActive(tab3, "tab3");
 
-            assert.equal(getClasses(defaultTab),"activeTab");
+            function assertTabActive(element, elementName){
+                assert.equal(getClasses(element), ACTIVE_TAB);
+
+            }
+            function assertTabInActive(element, elementName){
+                assert.equal(getClasses(element), null, elementName +" should not be styled");
+            }
+            
         });
+
         it("preserve existing classes on the active tab",function(){
 
         });
