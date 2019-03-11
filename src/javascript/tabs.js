@@ -29,14 +29,18 @@
      function showTab(tabToShow, options){
         var activeIndex = findIndex(options.tabs, tabToShow);
         var contentToShow = options.content[activeIndex];
-  
+
+        options.tabs.forEach(function(element){
+            element.classList.remove(options.activeTabClass);
+        });
+        tabToShow.classList.add(options.activeTabClass);
+   
         options.content.forEach(function(element){
         element.classList.add(options.hiddenContentClass);
 
          });
         contentToShow.classList.remove(options.hiddenContentClass);
-        tabToShow.classList.add(options.activeTabClass);
-    }
+         }
 
     function findIndex(contentTab, defaultContentTab){
         for(var i=0;i < contentTab.length; i++){

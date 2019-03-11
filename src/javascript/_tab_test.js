@@ -58,20 +58,20 @@
                 tabs: [tab1, tab2, tab3],
                 content: [content1, content2, content3],
                 defaultTab: tab1,
-                activeTabClass: "activeTab",
-                hiddenContentClass: "hiddenContent"
+                activeTabClass: ACTIVE_TAB,
+                hiddenContentClass: HIDDEN_CONTENT
             });
+            
             tab2.click();
             assertContentVisible(content2, "content 2");
+            assertContentHidden(content1, "content1");
+
+            assertTabActive(tab2, "tab2");
+            assertTabInactive(tab1, "tab1");
 
             tab3.click();
             assertContentVisible(content3, "content3");
-            //click tab2
-            //assert content2 is visible
-            //assert content1 is no longer visible
-
-            //assert tab2 is active
-            //assert tab1 is no longer active
+           
         });
 
         it("preserve existing class when adding a new classes upon initialization ", function(){
@@ -111,17 +111,11 @@
                 activeTabClass:ACTIVE_TAB,
                 hiddenContentClass:IRRELEVANT
             });
-            assertTabInActive(tab1, "tab 1");
+            assertTabInactive(tab1, "tab 1");
              assertTabActive(defaultTab, "defaultTab") ;
-            assertTabInActive(tab3, "tab3");
+            assertTabInactive(tab3, "tab3");
 
-            function assertTabActive(element, elementName){
-                assert.equal(getClasses(element), ACTIVE_TAB);
-
-            }
-            function assertTabInActive(element, elementName){
-                assert.equal(getClasses(element), null, elementName +" should not be styled");
-            }
+          
             
         });
 
@@ -129,6 +123,15 @@
 
         });
 
+        function assertTabActive(element, elementName){
+            assert.equal(getClasses(element), ACTIVE_TAB);
+
+        }
+        function assertTabInactive(element, elementName){
+            var classes = getClasses(element);
+            if(classes === null) classes ="";
+            assert.equal(classes, "", elementName +" should not be styled");
+        }
         
         function assertContentHidden(element, elementName){
             assert.equal(getClasses(element), HIDDEN_CONTENT, elementName +"should be hidden");
