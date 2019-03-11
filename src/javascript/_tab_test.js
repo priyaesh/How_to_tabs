@@ -38,14 +38,14 @@
             });
                 
 
-            assertContentHidden(content1, "element1");
-            assertContentVisible(defaultContent,"default element");
-            assert.equal(getClasses(defaultContent), "","defaultTabContent should not be hidden");
-            assertContentHidden(content3, "element3");
+            assertContentHidden(content1, "element1 should be hidden");
+            assertContentVisible(defaultContent,"default element should not be hidden");
+          //  assert.equal(getClasses(defaultContent), "","defaultTabContent should not be hidden");
+            assertContentHidden(content3, "element3 should be hidden");
         });
 
         
-        it("switch content when tab is clicked", function(){
+        it("switches content when tab is clicked", function(){
             var tab1 = createTab();
             var tab2 = createTab();
             var tab3 = createTab();
@@ -61,16 +61,16 @@
                 activeTabClass: ACTIVE_TAB,
                 hiddenContentClass: HIDDEN_CONTENT
             });
-            
-            tab2.click();
-            assertContentVisible(content2, "content 2");
-            assertContentHidden(content1, "content1");
 
-            assertTabActive(tab2, "tab2");
-            assertTabInactive(tab1, "tab1");
+            tab2.click();
+            assertContentVisible(content2, "content 2 should be visible after click");
+            assertTabActive(tab2, "tab2 should be visible click");
+
+            assertContentHidden(content1, "content1 should no longer be visible after click ");
+             assertTabInactive(tab1, "tab1 should not be visible visible ");
 
             tab3.click();
-            assertContentVisible(content3, "content3");
+            assertContentVisible(content3, "should be able to click multiple tabs");
            
         });
 
@@ -111,9 +111,9 @@
                 activeTabClass:ACTIVE_TAB,
                 hiddenContentClass:IRRELEVANT
             });
-            assertTabInactive(tab1, "tab 1");
-             assertTabActive(defaultTab, "defaultTab") ;
-            assertTabInactive(tab3, "tab3");
+            assertTabInactive(tab1, "tab 1 should be hidden");
+             assertTabActive(defaultTab, "defaultTab should not be hidden") ;
+            assertTabInactive(tab3, "tab3 should be hidden");
 
           
             
@@ -123,22 +123,20 @@
 
         });
 
-        function assertTabActive(element, elementName){
+        function assertTabActive(element, message){
             assert.equal(getClasses(element), ACTIVE_TAB);
 
         }
-        function assertTabInactive(element, elementName){
-            var classes = getClasses(element);
-            if(classes === null) classes ="";
-            assert.equal(classes, "", elementName +" should not be styled");
+        function assertTabInactive(element, message ){
+               assert.equal(getClasses(element), "", message +" should not be styled");
         }
         
-        function assertContentHidden(element, elementName){
-            assert.equal(getClasses(element), HIDDEN_CONTENT, elementName +"should be hidden");
+        function assertContentHidden(element, message){
+            assert.equal(getClasses(element), HIDDEN_CONTENT, message +"should be hidden");
         }
 
-        function assertContentVisible(element, elementName){
-            assert.equal(getClasses(element), "", elementName +"should not be hidden");
+        function assertContentVisible(element, message){
+            assert.equal(getClasses(element), "", message +"should not be hidden");
       
         }
         
@@ -150,7 +148,9 @@
        }
 
        function getClasses(element){
-           return element.getAttribute("class");
+           var result = element.getAttribute("class");
+           if(result === null) result = "";
+           return result;
     
        }
 
