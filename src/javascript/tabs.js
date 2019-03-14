@@ -13,20 +13,23 @@
         checkOption(options.activeTabClass,"options.activeTabClass");
         checkOption(options.hiddenContentClass,"options.hiddenContentClass");
 
-        var defaultTab = options.defaultTab;
-        
+        //var defaultTab = options.defaultTab;
+        handleClicks(options);
         showTab(options.defaultTab, options);
         
+    };
+        
+    function handleClicks(options){
+        //console.log("tabElement"+tabElement);
         options.tabs.forEach(function(tabElement){
-            tabElement.addEventListener("click",function(){
+             tabElement.addEventListener("click",function(event){
                 showTab(event.target, options);
             });
         });
-        
-        
-        };
 
-     function showTab(tabToShow, options){
+    }
+
+    function showTab(tabToShow, options){
         var activeIndex = findIndex(options.tabs, tabToShow);
         var contentToShow = options.content[activeIndex];
 
@@ -34,13 +37,12 @@
             element.classList.remove(options.activeTabClass);
         });
         tabToShow.classList.add(options.activeTabClass);
-   
-        options.content.forEach(function(element){
-        element.classList.add(options.hiddenContentClass);
 
-         });
+        options.content.forEach(function(element){
+            element.classList.add(options.hiddenContentClass);
+        });
         contentToShow.classList.remove(options.hiddenContentClass);
-         }
+    }
 
     function findIndex(contentTab, defaultContentTab){
         for(var i=0;i < contentTab.length; i++){
@@ -49,7 +51,9 @@
         }
         throw new Error ("Could not be find default in list");
     }
+    
     function checkOption(option, name){
         if(option === undefined) throw new Error ("Expected "+name);
     }
+    
 }());
